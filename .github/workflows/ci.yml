@@ -1,6 +1,6 @@
 name: ci
 
-# Task 2.4 baseline timing: no cache, single Go version, no path filter
+# Task 2.4 timing: cache only (single Go, no path filter)
 on:
   push:
     branches: [main]
@@ -22,7 +22,8 @@ jobs:
       - uses: actions/setup-go@0aaccfd150d50ccaeb58ebd88d36e91967a5f35b # v5.4.0
         with:
           go-version: '1.24'
-          cache: false
+          cache: true
+          cache-dependency-path: app/go.mod
       - run: go vet ./...
 
   test:
@@ -36,7 +37,8 @@ jobs:
       - uses: actions/setup-go@0aaccfd150d50ccaeb58ebd88d36e91967a5f35b # v5.4.0
         with:
           go-version: '1.24'
-          cache: false
+          cache: true
+          cache-dependency-path: app/go.mod
       - env:
           GOFLAGS: -buildvcs=false
         run: go test -race -count=1 ./...
