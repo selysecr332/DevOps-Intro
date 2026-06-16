@@ -1,11 +1,16 @@
 name: ci
 
-# Task 2.4 timing: cache + matrix (no path filter)
 on:
   push:
     branches: [main]
+    paths:
+      - 'app/**'
+      - '.github/workflows/ci.yml'
   pull_request:
     branches: [main]
+    paths:
+      - 'app/**'
+      - '.github/workflows/ci.yml'
 
 permissions:
   contents: read
